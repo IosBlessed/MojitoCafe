@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>810352101347-fh8fibbh492ifukpoa1o7rgvkkcutarj.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.810352101347-fh8fibbh492ifukpoa1o7rgvkkcutarj</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAmEOGqCDFznXmspqybD7UFfR6DhdXg5Ic</string>
+	<key>GCM_SENDER_ID</key>
+	<string>810352101347</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>md.restaurant.MojitoCafe</string>
+	<key>PROJECT_ID</key>
+	<string>mojitocafe-fd3ea</string>
+	<key>STORAGE_BUCKET</key>
+	<string>mojitocafe-fd3ea.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:810352101347:ios:d407716316b011c05682d6</string>
+</dict>
+</plist>

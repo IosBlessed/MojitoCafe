@@ -1,0 +1,531 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3727650F29E2EA20006CAE87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3727650E29E2EA20006CAE87 /* Assets.xcassets */; };
+		3727651229E2EA20006CAE87 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3727651029E2EA20006CAE87 /* LaunchScreen.storyboard */; };
+		3727652429E2EB15006CAE87 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3727652329E2EB15006CAE87 /* MenuViewController.swift */; };
+		3727652629E2EB3E006CAE87 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3727652529E2EB3E006CAE87 /* Configuration.swift */; };
+		3727652829E2EB70006CAE87 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3727652729E2EB70006CAE87 /* AppDelegate.swift */; };
+		3727652A29E2EB96006CAE87 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3727652929E2EB96006CAE87 /* SceneDelegate.swift */; };
+		3727652C29E2EBAE006CAE87 /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3727652B29E2EBAE006CAE87 /* ProductModel.swift */; };
+		3727652F29E2EBC8006CAE87 /* Extension + MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3727652E29E2EBC8006CAE87 /* Extension + MenuVC.swift */; };
+		3784BFAF29E31238009FF24B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3784BFAE29E31238009FF24B /* GoogleService-Info.plist */; };
+		3784BFB129E316FA009FF24B /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3784BFB029E316FA009FF24B /* MenuViewModel.swift */; };
+		E06DD0CFBE2AAB3FA26A1C73 /* Pods_MojitoCafe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D152C8CA584164A0655F0666 /* Pods_MojitoCafe.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3727650229E2EA1F006CAE87 /* MojitoCafe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MojitoCafe.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3727650E29E2EA20006CAE87 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3727651129E2EA20006CAE87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3727651329E2EA20006CAE87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3727652329E2EB15006CAE87 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		3727652529E2EB3E006CAE87 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		3727652729E2EB70006CAE87 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3727652929E2EB96006CAE87 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		3727652B29E2EBAE006CAE87 /* ProductModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
+		3727652E29E2EBC8006CAE87 /* Extension + MenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension + MenuVC.swift"; sourceTree = "<group>"; };
+		3784BFAE29E31238009FF24B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3784BFB029E316FA009FF24B /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
+		5E873534D69F424714FE5E4E /* Pods-MojitoCafe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojitoCafe.release.xcconfig"; path = "Target Support Files/Pods-MojitoCafe/Pods-MojitoCafe.release.xcconfig"; sourceTree = "<group>"; };
+		AAEE20ACA4BFB4DCBFCB55BC /* Pods-MojitoCafe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojitoCafe.debug.xcconfig"; path = "Target Support Files/Pods-MojitoCafe/Pods-MojitoCafe.debug.xcconfig"; sourceTree = "<group>"; };
+		D152C8CA584164A0655F0666 /* Pods_MojitoCafe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojitoCafe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		372764FF29E2EA1F006CAE87 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E06DD0CFBE2AAB3FA26A1C73 /* Pods_MojitoCafe.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		372764F929E2EA1F006CAE87 = {
+			isa = PBXGroup;
+			children = (
+				3727650429E2EA1F006CAE87 /* MojitoCafe */,
+				3727650329E2EA1F006CAE87 /* Products */,
+				46EED2B74CA5BAFBC9126C1D /* Pods */,
+				713F5AB898EA032FE4EF1161 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		3727650329E2EA1F006CAE87 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3727650229E2EA1F006CAE87 /* MojitoCafe.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3727650429E2EA1F006CAE87 /* MojitoCafe */ = {
+			isa = PBXGroup;
+			children = (
+				3727651929E2EA4E006CAE87 /* Configurator */,
+				3727651A29E2EA5E006CAE87 /* Screens */,
+				3727652729E2EB70006CAE87 /* AppDelegate.swift */,
+				3727652929E2EB96006CAE87 /* SceneDelegate.swift */,
+				3727650E29E2EA20006CAE87 /* Assets.xcassets */,
+				3727651029E2EA20006CAE87 /* LaunchScreen.storyboard */,
+				3727651329E2EA20006CAE87 /* Info.plist */,
+				3784BFAE29E31238009FF24B /* GoogleService-Info.plist */,
+			);
+			path = MojitoCafe;
+			sourceTree = "<group>";
+		};
+		3727651929E2EA4E006CAE87 /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				3727652529E2EB3E006CAE87 /* Configuration.swift */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
+		3727651A29E2EA5E006CAE87 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				3727651B29E2EA9D006CAE87 /* Product */,
+				3727651C29E2EAA7006CAE87 /* Home */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		3727651B29E2EA9D006CAE87 /* Product */ = {
+			isa = PBXGroup;
+			children = (
+				3727652229E2EAD0006CAE87 /* ViewModel */,
+				3727652129E2EACB006CAE87 /* Model */,
+				3727652029E2EAC6006CAE87 /* View */,
+			);
+			path = Product;
+			sourceTree = "<group>";
+		};
+		3727651C29E2EAA7006CAE87 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				3727652D29E2EBB5006CAE87 /* Extensions */,
+				3727651F29E2EAC0006CAE87 /* Model */,
+				3727651E29E2EABA006CAE87 /* ViewModel */,
+				3727651D29E2EAB4006CAE87 /* View */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		3727651D29E2EAB4006CAE87 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3727652329E2EB15006CAE87 /* MenuViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3727651E29E2EABA006CAE87 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				3784BFB029E316FA009FF24B /* MenuViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		3727651F29E2EAC0006CAE87 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3727652B29E2EBAE006CAE87 /* ProductModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3727652029E2EAC6006CAE87 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3727652129E2EACB006CAE87 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3727652229E2EAD0006CAE87 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		3727652D29E2EBB5006CAE87 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3727652E29E2EBC8006CAE87 /* Extension + MenuVC.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		46EED2B74CA5BAFBC9126C1D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AAEE20ACA4BFB4DCBFCB55BC /* Pods-MojitoCafe.debug.xcconfig */,
+				5E873534D69F424714FE5E4E /* Pods-MojitoCafe.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		713F5AB898EA032FE4EF1161 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D152C8CA584164A0655F0666 /* Pods_MojitoCafe.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3727650129E2EA1F006CAE87 /* MojitoCafe */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3727651629E2EA20006CAE87 /* Build configuration list for PBXNativeTarget "MojitoCafe" */;
+			buildPhases = (
+				EA412B121D53971303A03E8C /* [CP] Check Pods Manifest.lock */,
+				372764FE29E2EA1F006CAE87 /* Sources */,
+				372764FF29E2EA1F006CAE87 /* Frameworks */,
+				3727650029E2EA1F006CAE87 /* Resources */,
+				BED48B3116617CE4704732EB /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MojitoCafe;
+			productName = MojitoCafe;
+			productReference = 3727650229E2EA1F006CAE87 /* MojitoCafe.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		372764FA29E2EA1F006CAE87 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					3727650129E2EA1F006CAE87 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = 372764FD29E2EA1F006CAE87 /* Build configuration list for PBXProject "MojitoCafe" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 372764F929E2EA1F006CAE87;
+			productRefGroup = 3727650329E2EA1F006CAE87 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3727650129E2EA1F006CAE87 /* MojitoCafe */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3727650029E2EA1F006CAE87 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3727651229E2EA20006CAE87 /* LaunchScreen.storyboard in Resources */,
+				3727650F29E2EA20006CAE87 /* Assets.xcassets in Resources */,
+				3784BFAF29E31238009FF24B /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BED48B3116617CE4704732EB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MojitoCafe/Pods-MojitoCafe-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MojitoCafe/Pods-MojitoCafe-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MojitoCafe/Pods-MojitoCafe-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EA412B121D53971303A03E8C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MojitoCafe-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		372764FE29E2EA1F006CAE87 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3727652829E2EB70006CAE87 /* AppDelegate.swift in Sources */,
+				3784BFB129E316FA009FF24B /* MenuViewModel.swift in Sources */,
+				3727652629E2EB3E006CAE87 /* Configuration.swift in Sources */,
+				3727652429E2EB15006CAE87 /* MenuViewController.swift in Sources */,
+				3727652A29E2EB96006CAE87 /* SceneDelegate.swift in Sources */,
+				3727652C29E2EBAE006CAE87 /* ProductModel.swift in Sources */,
+				3727652F29E2EBC8006CAE87 /* Extension + MenuVC.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3727651029E2EA20006CAE87 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3727651129E2EA20006CAE87 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3727651429E2EA20006CAE87 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		3727651529E2EA20006CAE87 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3727651729E2EA20006CAE87 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAEE20ACA4BFB4DCBFCB55BC /* Pods-MojitoCafe.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FB8LQ6BXM4;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MojitoCafe/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Mojito Cafe";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = md.restaurant.MojitoCafe;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3727651829E2EA20006CAE87 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5E873534D69F424714FE5E4E /* Pods-MojitoCafe.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FB8LQ6BXM4;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MojitoCafe/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Mojito Cafe";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = md.restaurant.MojitoCafe;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		372764FD29E2EA1F006CAE87 /* Build configuration list for PBXProject "MojitoCafe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3727651429E2EA20006CAE87 /* Debug */,
+				3727651529E2EA20006CAE87 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3727651629E2EA20006CAE87 /* Build configuration list for PBXNativeTarget "MojitoCafe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3727651729E2EA20006CAE87 /* Debug */,
+				3727651829E2EA20006CAE87 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 372764FA29E2EA1F006CAE87 /* Project object */;
+}
