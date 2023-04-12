@@ -4,14 +4,14 @@
 //
 //  Created by Никита Данилович on 06.04.2023.
 //
-
 import UIKit
+import Combine
 import FirebaseCore
 import FirebaseFirestore
 
 
 //MARK: - MenuGroupCollectionViewCell class
-class MenuGroupCollectionViewCell:UICollectionViewCell{
+final class MenuGroupCollectionViewCell:UICollectionViewCell{
     
     override var isSelected: Bool{
 
@@ -74,14 +74,92 @@ class MenuGroupCollectionViewCell:UICollectionViewCell{
 }
 
 //MARK: - TableViewCell class
-class MenuProductsTableViewCell:UITableViewCell{
+final class MenuProductsTableViewCell:UITableViewCell{
+    
+    lazy var productImageView:UIImageView = {
+        
+        let imageView = UIImageView(frame: .zero)
+        
+        imageView.frame = CGRect(
+            x: 0,
+            y: 0,
+            width: 100,
+            height: self.bounds.height
+        )
+        
+        imageView.backgroundColor = .clear
+        
+        imageView.layer.masksToBounds = true
+        imageView.layer.cornerRadius = 10
+        
+        return imageView
+    }()
+    lazy var titleLabel:UILabel = {
+        
+        let label = UILabel(frame: .zero)
+        
+        label.backgroundColor = .clear
+        
+        label.textAlignment = .center
+        label.textColor = .black
+        
+        
+        return label
+    }()
+    lazy var descriptionLabel:UILabel = {
+        
+        let label = UILabel(frame: .zero)
+        
+        label.backgroundColor = .clear
+        
+        label.textAlignment = .center
+        label.textColor = .black
+        
+        
+        return label
+    }()
+    lazy var priceLabel:UILabel = {
+        
+        let label = UILabel(frame: .zero)
+        
+        label.backgroundColor = .clear
+        
+        label.textAlignment = .center
+        label.textColor = .black
+        
+        
+        return label
+    }()
     
     
+    private func setupViews(){
+        
+        self.addSubview(productImageView)
+        self.addSubview(titleLabel)
+        self.addSubview(descriptionLabel)
+        self.addSubview(priceLabel)
+        
+    }
+    
+    init(){
+        super.init(style: .default, reuseIdentifier: "productTableViewCell")
+        
+        setupViews()
+        
+    }
+    
+    required init?(coder:NSCoder){
+        fatalError()
+    }
 }
 
 
 //MARK: - MenuViewController class
-class MenuViewController: UIViewController,UINavigationControllerDelegate {
+final class MenuViewController: UIViewController,UINavigationControllerDelegate {
+    
+    fileprivate var subscriberMenuGroup:AnyCancellable?
+    
+    fileprivate var menuViewModel = MenuViewModel()
     
     var menuGroupCollectionView:UICollectionView?
     
@@ -191,7 +269,7 @@ class MenuViewController: UIViewController,UINavigationControllerDelegate {
             
         }
         
-        guard let productsScrollViewBounds = menuProductsScrollView?.bounds else{
+        guard let productsScrollViewBounds = menuProductsScrollView?.bounds else {
             
             return
         }
@@ -234,9 +312,42 @@ class MenuViewController: UIViewController,UINavigationControllerDelegate {
         menuProductsTableView.delegate = self
         menuProductsTableView.dataSource = self
         
+        menuProductsTableView.register(
+            MenuProductsTableViewCell.self,
+            forCellReuseIdentifier: "productTableViewCell"
+        )
+        
         return menuProductsTableView
     }
     
+    private func initializeMenuGroupSubscriber(){
+        
+        subscriberMenuGroup = menuViewModel.$groups.sink{
+            
+           [weak self] menuGroups in
+            
+            self?.groups = menuGroups
+            
+            self?.menuGroupCollectionView?.reloadData()
+            
+            if menuGroups.count != 0{
+                
+                let defaultRowIndexPath = IndexPath(row: 0, section: 0)
+                
+                self?.menuGroupCollectionView?.selectItem(
+                    at: defaultRowIndexPath,
+                    animated: true,
+                    scrollPosition: .centeredHorizontally
+                )
+                
+                self?.initializeMenuProductsTableViews()
+                
+            }
+            
+        }
+        
+        menuViewModel.fetchCategories()
+    }
     
     //MARK: - Lyfecycle
     override func viewDidLoad() {
@@ -250,78 +361,9 @@ class MenuViewController: UIViewController,UINavigationControllerDelegate {
         inititalizeMenuGroupCollectionView()
         
         initializeMenuProductsScrollView()
-   
-    }
+        
+        initializeMenuGroupSubscriber()
     
-    func getCategoriesFromFirestore(collection:String, completion: @escaping([Category]?,Error?) -> Void){
-        let firestore = Firestore.firestore()
-        
-        firestore.collection(collection).getDocuments{
-            
-            QuerySnapshot,error in
-            
-            guard error == nil else{
-                
-                return completion(nil,error!)
-            }
-            var documents = QuerySnapshot?.documents.map{
-                document in
-                
-                document.data()
-            }
-            
-            documents = documents?.sorted{
-                firstID,secondID in
-                
-                (firstID["id"] as? Int ?? -1) < (secondID["id"] as? Int ?? -1)
-            }
-            
-            if let documents = documents{
-                
-                let categories = documents.map{
-                    document in
-                    
-                    let categoryID = document["id"] as? Int ?? 0
-                    let categoryName = document["name"] as? String ?? "Unknown category"
-                    
-                    return Category(name: categoryName, id: categoryID )
-                }
-                return completion(categories,nil)
-            }
-        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        
-        super.viewWillAppear(animated)
-        
-        getCategoriesFromFirestore(collection: "menuCategories"){
-            categories, error in
-            
-            guard error == nil else{
-                print(error!.localizedDescription)
-                return
-            }
-            
-            if let categories = categories{
-                    
-                    for category in categories{
-                        self.groups.append(category.name)
-                    }
-                    
-                    self.menuGroupCollectionView?.reloadData()
-                
-                    self.initializeMenuProductsTableViews()
-                
-                    self.viewDidLayoutSubviews()
-                    
-                    self.menuGroupCollectionView?.selectItem(
-                        at: IndexPath(row: 0, section: 0),
-                        animated: true,
-                        scrollPosition: .centeredHorizontally
-                    )
-            }
-        }
     }
     
     private func setupConstraints(){
