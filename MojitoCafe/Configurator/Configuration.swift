@@ -8,7 +8,7 @@ import UIKit
 import FirebaseCore
 import FirebaseFirestore
 
-class Configuration{
+final class Configuration{
 
     static var configure = Configuration()
     
