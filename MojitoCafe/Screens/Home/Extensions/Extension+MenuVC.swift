@@ -76,15 +76,24 @@ extension MenuViewController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       // let
         
-        return UITableViewCell(frame: .zero)
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "productTableViewCell") as? MenuProductsTableViewCell{
+            
+            return cell
+        }
+        
+       fatalError("Unexpectendly found nil at dequeue of reusable cell")
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return 150
+    }
     
 }
 
 extension MenuViewController:UIScrollViewDelegate{
+    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if scrollView == menuProductsScrollView{
             
@@ -99,4 +108,5 @@ extension MenuViewController:UIScrollViewDelegate{
                 scrollPosition: .centeredHorizontally)
         }
     }
+    
 }
