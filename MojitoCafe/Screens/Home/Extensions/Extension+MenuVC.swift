@@ -12,7 +12,7 @@ extension MenuViewController: UICollectionViewDelegate,UICollectionViewDataSourc
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-            return groups.count
+        return menuViewModel.categories.count
         
     }
 
@@ -24,8 +24,10 @@ extension MenuViewController: UICollectionViewDelegate,UICollectionViewDataSourc
             ) as? MenuGroupCollectionViewCell
         
             menuGroupCell?.initializeCellView()
+        
+            let title = menuViewModel.categories[indexPath.row].name
             
-            menuGroupCell?.sectionNameLabel.text = groups[indexPath.row]
+            menuGroupCell?.sectionNameLabel.text = title
             
             return menuGroupCell ?? UICollectionViewCell(frame: .zero)
             
@@ -69,18 +71,36 @@ extension MenuViewController: UICollectionViewDelegate,UICollectionViewDataSourc
     
 }
 
+
 extension MenuViewController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        
+        for category in menuViewModel.categories{
+            if category.name == tableView.restorationIdentifier{
+                currentCategory = category
+            }
+        }
+        return currentCategory?.products?.count ?? 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         if let cell = tableView.dequeueReusableCell(withIdentifier: "productTableViewCell") as? MenuProductsTableViewCell{
+            
+            
+            guard let products = currentCategory?.products else{
+                print("Error! Unrecognized products section")
+                return cell
+            }
+        
+            cell.titleLabel.text = products[indexPath.row].title
+            cell.descriptionLabel.text = products[indexPath.row].description
+            cell.currencyLabel.text = products[indexPath.row].currency
+            cell.priceLabel.text = String(products[indexPath.row].price)
             
             return cell
         }
+        
         
        fatalError("Unexpectendly found nil at dequeue of reusable cell")
     }
