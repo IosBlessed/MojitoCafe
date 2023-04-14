@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 
 extension MenuViewController: UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
@@ -71,7 +72,6 @@ extension MenuViewController: UICollectionViewDelegate,UICollectionViewDataSourc
     
 }
 
-
 extension MenuViewController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -92,7 +92,11 @@ extension MenuViewController:UITableViewDelegate,UITableViewDataSource{
                 print("Error! Unrecognized products section")
                 return cell
             }
-        
+            if let urlImage = URL(string: products[indexPath.row].imagePath){
+                cell.productImageView.sd_setImage(with: urlImage)
+            }else{
+                cell.productImageView.image = UIImage(named: "mojito.jpg")
+            }
             cell.titleLabel.text = products[indexPath.row].title
             cell.descriptionLabel.text = products[indexPath.row].description
             cell.currencyLabel.text = products[indexPath.row].currency
@@ -107,7 +111,7 @@ extension MenuViewController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 150
+        return 170
     }
     
 }
