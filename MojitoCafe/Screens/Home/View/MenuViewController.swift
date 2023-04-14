@@ -37,18 +37,21 @@ final class MenuGroupCollectionViewCell:UICollectionViewCell{
     
    private func unselectedCellView(){
        
-        self.backgroundColor = .green
-        self.layer.sublayers?.first?.backgroundColor = UIColor.clear.cgColor
+       self.backgroundColor = .clear
+       sectionNameLabel.textColor = .white
+       self.layer.sublayers?.first?.backgroundColor = UIColor.clear.cgColor
        
     }
     
     private func selectedCellView(){
         
-        self.backgroundColor = .yellow
-        self.layer.sublayers?.first?.backgroundColor = UIColor.yellow.cgColor
+        self.backgroundColor = .init(white: 1.0, alpha: 0.9)
+        sectionNameLabel.textColor = .black
+        self.layer.sublayers?.first?.backgroundColor = UIColor.white.cgColor
         
     }
     
+    //MARK: - SHOULD BE REFACTORED
     private lazy var backgroundLayer:CALayer = {
         
         let layer = CALayer()
@@ -64,6 +67,8 @@ final class MenuGroupCollectionViewCell:UICollectionViewCell{
         
         let name = UILabel(frame: .zero)
         
+        name.textColor = .black
+        
         name.frame = self.bounds
         
         name.textAlignment = .center
@@ -73,93 +78,290 @@ final class MenuGroupCollectionViewCell:UICollectionViewCell{
     
 }
 
-//MARK: - TableViewCell class
+//MARK: - TableView Product Cell class
 final class MenuProductsTableViewCell:UITableViewCell{
+    
+    lazy var cellView:UIView = {
+        
+        let cellView = UIView(frame: .zero)
+        
+        cellView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let gradientLayer = CAGradientLayer()
+        
+        let upperColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1.0).cgColor
+        let bottomColor = UIColor(red: 0.0/255.0, green: 160.0/255.0, blue: 0.0/255.0, alpha: 1.0).cgColor
+        
+        gradientLayer.colors = [upperColor,bottomColor]
+
+        gradientLayer.locations = [0.1,1.0]
+        
+        DispatchQueue.main.async {
+            
+            gradientLayer.frame = self.bounds
+            
+        }
+        
+        cellView.layer.addSublayer(gradientLayer)
+        
+        cellView.layer.masksToBounds = true
+        cellView.layer.cornerRadius = 10
+        
+        DispatchQueue.main.async {
+            self.layer.shadowOffset = .zero
+            self.layer.shadowOpacity = 1.0
+            self.layer.shadowColor = UIColor.init(white: 1.0, alpha: 0.9).cgColor
+            self.layer.shadowRadius = 2
+            
+        }
+        
+        
+        
+        return cellView
+    }()
     
     lazy var productImageView:UIImageView = {
         
         let imageView = UIImageView(frame: .zero)
         
-        imageView.frame = CGRect(
-            x: 0,
-            y: 0,
-            width: 100,
-            height: self.bounds.height
-        )
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         
-        imageView.backgroundColor = .clear
+        imageView.backgroundColor = .white
+        imageView.contentMode = .scaleAspectFill
         
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 10
         
         return imageView
     }()
+    
     lazy var titleLabel:UILabel = {
         
         let label = UILabel(frame: .zero)
         
-        label.backgroundColor = .clear
+        label.translatesAutoresizingMaskIntoConstraints = false
         
         label.textAlignment = .center
-        label.textColor = .black
+        label.textColor = .init(white: 1.0, alpha: 0.9)
         
+        label.attributedText = NSAttributedString(
+            string: label.text ?? " ",
+            attributes: [
+                NSAttributedString.Key.font:UIFont.systemFont(ofSize: 19, weight: .bold)
+            ])
         
         return label
     }()
+    
     lazy var descriptionLabel:UILabel = {
         
         let label = UILabel(frame: .zero)
         
-        label.backgroundColor = .clear
+        label.translatesAutoresizingMaskIntoConstraints = false
         
+        label.textAlignment = .natural
+        label.textColor = .init(white: 1.0, alpha: 0.9)
+        label.numberOfLines = 3
         label.textAlignment = .center
-        label.textColor = .black
         
+        label.attributedText = NSAttributedString(
+            string: label.text ?? " ",
+            attributes: [
+            NSAttributedString.Key.font:UIFont.systemFont(ofSize: 16)
+        ])
         
         return label
     }()
+    
+    lazy var currencyLabel:UILabel = {
+        
+        let label = UILabel(frame: .zero)
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+    
+        label.textAlignment = .left
+        label.textColor = .init(white: 1.0, alpha: 0.9)
+    
+        return label
+    }()
+    
     lazy var priceLabel:UILabel = {
         
         let label = UILabel(frame: .zero)
         
-        label.backgroundColor = .clear
+        label.translatesAutoresizingMaskIntoConstraints = false
         
-        label.textAlignment = .center
-        label.textColor = .black
-        
+        label.textAlignment = .right
+        label.textColor = .init(white: 1.0, alpha: 0.9)
         
         return label
     }()
     
-    
-    private func setupViews(){
+    fileprivate func setupViews(){
         
-        self.addSubview(productImageView)
-        self.addSubview(titleLabel)
-        self.addSubview(descriptionLabel)
-        self.addSubview(priceLabel)
+        self.backgroundColor = .clear
+        self.selectedBackgroundView = UIView()
+        
+        cellView.addSubview(productImageView)
+        cellView.addSubview(titleLabel)
+        cellView.addSubview(descriptionLabel)
+        cellView.addSubview(priceLabel)
+        cellView.addSubview(currencyLabel)
+        
+        self.addSubview(cellView)
+        
+        DispatchQueue.main.async {
+
+            self.setupConstraints()
+
+        }
         
     }
     
-    init(){
-        super.init(style: .default, reuseIdentifier: "productTableViewCell")
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
         
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+
         setupViews()
-        
     }
-    
+
     required init?(coder:NSCoder){
         fatalError()
     }
-}
+    
+    //MARK: - Table View's Product's Cell Constraints Section
+    private func setupConstraints(){
+        
+        // Cell's View Constraints Section
+        cellView.topAnchor.constraint(
+            equalTo:self.topAnchor,
+            constant: 15
+        ).isActive = true
+        
+        cellView.leftAnchor.constraint(
+            equalTo: self.leftAnchor,
+            constant: 5
+        ).isActive = true
+        
+        cellView.rightAnchor.constraint(
+            equalTo: self.rightAnchor,
+            constant: -5
+        ).isActive = true
+        
+        cellView.bottomAnchor.constraint(
+            equalTo: self.bottomAnchor,
+            constant: -15
+        ).isActive = true
+        
+        
+        // ProductImage Constraints Section
+        productImageView.topAnchor.constraint(
+            equalTo: cellView.topAnchor,
+            constant: 5
+        ).isActive = true
+        
+        productImageView.leftAnchor.constraint(
+            equalTo: cellView.leftAnchor,
+            constant: 5
+        ).isActive = true
+        
+        productImageView.widthAnchor.constraint(
+            equalToConstant: 120
+        ).isActive = true
+        
+        productImageView.bottomAnchor.constraint(
+            equalTo: cellView.bottomAnchor,
+            constant: -5
+        ).isActive = true
+        
+        // Product Title Constraints Section
+        titleLabel.topAnchor.constraint(
+            equalTo: cellView.topAnchor,
+            constant: 5
+        ).isActive = true
+        
+        titleLabel.leftAnchor.constraint(
+            equalTo: productImageView.rightAnchor,
+            constant: 10
+        ).isActive = true
+        
+        titleLabel.rightAnchor.constraint(
+            equalTo: cellView.rightAnchor,
+            constant: -10
+        ).isActive = true
+        
+        titleLabel.heightAnchor.constraint(
+            equalToConstant: 35
+        ).isActive = true
+        
+        // Description Label Constraints Section
+        descriptionLabel.topAnchor.constraint(
+            equalTo: titleLabel.bottomAnchor,
+            constant: 10
+        ).isActive = true
+        
+        descriptionLabel.leftAnchor.constraint(
+            equalTo: titleLabel.leftAnchor
+        ).isActive = true
+        
+        descriptionLabel.rightAnchor.constraint(
+            equalTo: titleLabel.rightAnchor
+        ).isActive = true
+        
+        descriptionLabel.heightAnchor.constraint(
+            equalToConstant: 45
+        ).isActive = true
+        
+        // Price Label Constraints Section
+        priceLabel.topAnchor.constraint(
+            equalTo: currencyLabel.topAnchor
+        ).isActive = true
 
+        priceLabel.rightAnchor.constraint(
+            equalTo: descriptionLabel.centerXAnchor,
+            constant: -2
+        ).isActive = true
+        
+        priceLabel.widthAnchor.constraint(
+            equalToConstant: 50
+        ).isActive = true
+        
+        priceLabel.bottomAnchor.constraint(
+            equalTo: cellView.bottomAnchor,constant: -5
+        ).isActive = true
+        
+        // Currency Label Constraints Section
+        currencyLabel.topAnchor.constraint(
+            equalTo: descriptionLabel.bottomAnchor,
+            constant: 5
+        ).isActive = true
+        
+        currencyLabel.leftAnchor.constraint(
+            equalTo: descriptionLabel.centerXAnchor,
+            constant: 2
+        ).isActive = true
+        
+        currencyLabel.widthAnchor.constraint(
+            equalToConstant: 40
+        ).isActive = true
+        
+        currencyLabel.bottomAnchor.constraint(
+            equalTo: cellView.bottomAnchor,
+            constant: -5
+        ).isActive = true
+        
+    }
+    
+}
 
 //MARK: - MenuViewController class
 final class MenuViewController: UIViewController,UINavigationControllerDelegate {
     
-    fileprivate var subscriberMenuGroup:AnyCancellable?
+    fileprivate var subscriberCategories:AnyCancellable?
     
-    fileprivate var menuViewModel = MenuViewModel()
+    fileprivate var subscriberProducts:AnyCancellable?
+    
+    var menuViewModel = MenuViewModel()
     
     var menuGroupCollectionView:UICollectionView?
     
@@ -169,11 +371,25 @@ final class MenuViewController: UIViewController,UINavigationControllerDelegate 
     
     var preselectedMenuGroupCellIndexPath:IndexPath?
     
-    var groups:[String] = []
+    var currentCategory:Category? = nil
     
     private func initializeBackgroundView(){
         
-        view.backgroundColor = .lightGray
+        let bgImageView = UIImageView(frame: view.bounds)
+        
+        bgImageView.image = UIImage(named: "mojito.jpg")
+        bgImageView.contentMode = .scaleAspectFill
+        
+        let blurEffect = UIBlurEffect(style: .dark)
+        
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        
+        blurEffectView.frame = bgImageView.bounds
+        
+        bgImageView.addSubview(blurEffectView)
+        
+        
+        view.addSubview(bgImageView)
         
     }
     
@@ -185,7 +401,8 @@ final class MenuViewController: UIViewController,UINavigationControllerDelegate 
         navigationController?.navigationBar.layoutIfNeeded()
         
         let titleTextAttributes:[NSAttributedString.Key:Any] = [
-            NSAttributedString.Key.font:UIFont.systemFont(ofSize: 21, weight: .bold)
+            NSAttributedString.Key.font:UIFont.systemFont(ofSize: 21, weight: .bold),
+            NSAttributedString.Key.foregroundColor:UIColor.init(white: 1.0, alpha: 0.9)
         ]
         
         navigationController?.navigationBar.titleTextAttributes = titleTextAttributes
@@ -193,7 +410,6 @@ final class MenuViewController: UIViewController,UINavigationControllerDelegate 
         let title = "Company name"
         
         self.title = title
-      
     }
     //MARK: - MenuGroupCollectionView
     private func inititalizeMenuGroupCollectionView(){
@@ -222,7 +438,6 @@ final class MenuViewController: UIViewController,UINavigationControllerDelegate 
         
         menuGroupCollectionView?.allowsSelection = true
 
-        
         menuGroupCollectionView?.register(
             MenuGroupCollectionViewCell.self,
             forCellWithReuseIdentifier: "menuSection"
@@ -230,7 +445,6 @@ final class MenuViewController: UIViewController,UINavigationControllerDelegate 
         
         menuGroupCollectionView?.delegate = self
         menuGroupCollectionView?.dataSource = self
-        
         
         view.addSubview(menuGroupCollectionView ?? UIView())
     }
@@ -243,9 +457,8 @@ final class MenuViewController: UIViewController,UINavigationControllerDelegate 
         
         menuProductsScrollView?.translatesAutoresizingMaskIntoConstraints = false
         
-        
-        menuProductsScrollView?.layer.borderColor = UIColor.green.cgColor
-        menuProductsScrollView?.layer.borderWidth = 2
+//        menuProductsScrollView?.layer.borderColor = UIColor.green.cgColor
+//        menuProductsScrollView?.layer.borderWidth = 2
         
         menuProductsScrollView?.isPagingEnabled = true
         menuProductsScrollView?.alwaysBounceHorizontal = false
@@ -258,13 +471,17 @@ final class MenuViewController: UIViewController,UINavigationControllerDelegate 
         view.addSubview(menuProductsScrollView ?? UIScrollView(frame: .zero))
     }
     
-    //MARK: - MenuProductsTableView section
     
+    //MARK: - MenuProductsTableView section
     private func initializeMenuProductsTableViews(){
         
-        for _ in 0..<groups.count{
+        for category in menuViewModel.categories{
             
             let tableView = createProductsTableView()
+            tableView.restorationIdentifier = String(category.name)
+            
+            tableView.estimatedRowHeight = 150
+
             menuProductsTableViews.append(tableView)
             
         }
@@ -306,11 +523,16 @@ final class MenuViewController: UIViewController,UINavigationControllerDelegate 
         
         let menuProductsTableView = UITableView(frame: .zero)
         
+        menuProductsTableView.delegate = self
+        menuProductsTableView.dataSource = self
+        
+        menuProductsTableView.backgroundColor = .clear
+        
         menuProductsTableView.layer.cornerRadius = 10
         menuProductsTableView.layer.masksToBounds = true
         
-        menuProductsTableView.delegate = self
-        menuProductsTableView.dataSource = self
+        menuProductsTableView.estimatedRowHeight = 150
+        menuProductsTableView.separatorStyle = .none
         
         menuProductsTableView.register(
             MenuProductsTableViewCell.self,
@@ -322,31 +544,29 @@ final class MenuViewController: UIViewController,UINavigationControllerDelegate 
     
     private func initializeMenuGroupSubscriber(){
         
-        subscriberMenuGroup = menuViewModel.$groups.sink{
-            
-           [weak self] menuGroups in
-            
-            self?.groups = menuGroups
-            
-            self?.menuGroupCollectionView?.reloadData()
-            
-            if menuGroups.count != 0{
+        menuViewModel.fetchMenuFromDatabase()
+ 
+            subscriberCategories = menuViewModel.$categories.sink{
                 
-                let defaultRowIndexPath = IndexPath(row: 0, section: 0)
+                [weak self] categories in
                 
-                self?.menuGroupCollectionView?.selectItem(
-                    at: defaultRowIndexPath,
-                    animated: true,
-                    scrollPosition: .centeredHorizontally
-                )
-                
-                self?.initializeMenuProductsTableViews()
+                if categories.count != 0 {
+                    
+                    DispatchQueue.main.async {
+                        
+                        self?.menuGroupCollectionView?.reloadData()
+                        
+                        self?.menuGroupCollectionView?.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+                        
+                        self?.initializeMenuProductsTableViews()
+                        
+                        
+                    }
+                    
+                }
                 
             }
-            
-        }
         
-        menuViewModel.fetchCategories()
     }
     
     //MARK: - Lyfecycle
@@ -413,10 +633,7 @@ final class MenuViewController: UIViewController,UINavigationControllerDelegate 
                     constant: -100
                 ).isActive = true
                 
-             
-                
             }
-            
         }
     }
     

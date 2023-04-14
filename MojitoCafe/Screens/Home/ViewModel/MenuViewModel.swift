@@ -6,12 +6,14 @@
 //
 
 import Combine
+import UIKit
 
 final class MenuViewModel{
     
-    @Published var groups:[String] = [String]()
+    @Published var categories:[Category] = [Category]()
+    @Published var products:[Product] = [Product]()
     
-    func fetchCategories(){
+    func fetchMenuFromDatabase(){
         
         APIDatabase.shared.getCategoriesFromFirestore(collection: "menuCategories"){
            [weak self] categories, error in
@@ -21,15 +23,53 @@ final class MenuViewModel{
                 return
             }
             
-            guard let categories = categories else {return}
-        
-            var menuGroups:[String] = []
             
-            for category in categories{
-                menuGroups.append(category.name)
+            if let self = self{
+                
+                if let categories = categories{
+                    
+                    var categoriesArray:[Category] = []
+                    
+                    for category in categories {
+                        
+                        var productsInCategory:[Product] = []
+                        
+                        for product in self.products{
+                           
+                            if category.id == product.categoryID{
+                                productsInCategory.append(product)
+                            }
+                        }
+                        let category = Category(name: category.name, id: category.id,products: productsInCategory)
+                        
+                        categoriesArray.append(category)
+                    }
+
+                    
+                    self.categories = categoriesArray
+                }
+            
             }
-            self?.groups = menuGroups
+           
         }
+        
+        APIDatabase.shared.getProductsFromFirestore(collection: "menuProducts"){
+            [weak self] products, error in
+            
+            guard error == nil else{
+                print(error!.localizedDescription)
+                return
+            }
+            
+            if let products = products{
+                
+                self?.products = products
+                            
+            }
+            
+            
+        }
+        
         
     }
     

@@ -15,9 +15,10 @@
 		3727652A29E2EB96006CAE87 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3727652929E2EB96006CAE87 /* SceneDelegate.swift */; };
 		3727652C29E2EBAE006CAE87 /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3727652B29E2EBAE006CAE87 /* ProductModel.swift */; };
 		3727652F29E2EBC8006CAE87 /* Extension+MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3727652E29E2EBC8006CAE87 /* Extension+MenuVC.swift */; };
-		37693F7B29E6BC1100B4078F /* API's in Resources */ = {isa = PBXBuildFile; fileRef = 37693F7929E6BC0C00B4078F /* API's */; };
+		37693F7E29E6C0D300B4078F /* ServiceDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37693F7D29E6C0D300B4078F /* ServiceDatabase.swift */; };
 		3784BFAF29E31238009FF24B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3784BFAE29E31238009FF24B /* GoogleService-Info.plist */; };
 		3784BFB129E316FA009FF24B /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3784BFB029E316FA009FF24B /* MenuViewModel.swift */; };
+		37A537E929E956FE008D85CB /* mojito.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37A537E829E956FE008D85CB /* mojito.jpg */; };
 		E06DD0CFBE2AAB3FA26A1C73 /* Pods_MojitoCafe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D152C8CA584164A0655F0666 /* Pods_MojitoCafe.framework */; };
 /* End PBXBuildFile section */
 
@@ -32,9 +33,10 @@
 		3727652929E2EB96006CAE87 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		3727652B29E2EBAE006CAE87 /* ProductModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
 		3727652E29E2EBC8006CAE87 /* Extension+MenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+MenuVC.swift"; sourceTree = "<group>"; };
-		37693F7929E6BC0C00B4078F /* API's */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "API's"; sourceTree = "<group>"; };
+		37693F7D29E6C0D300B4078F /* ServiceDatabase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceDatabase.swift; sourceTree = "<group>"; };
 		3784BFAE29E31238009FF24B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3784BFB029E316FA009FF24B /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
+		37A537E829E956FE008D85CB /* mojito.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = mojito.jpg; path = MojitoCafe/mojito.jpg; sourceTree = SOURCE_ROOT; };
 		5E873534D69F424714FE5E4E /* Pods-MojitoCafe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojitoCafe.release.xcconfig"; path = "Target Support Files/Pods-MojitoCafe/Pods-MojitoCafe.release.xcconfig"; sourceTree = "<group>"; };
 		AAEE20ACA4BFB4DCBFCB55BC /* Pods-MojitoCafe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojitoCafe.debug.xcconfig"; path = "Target Support Files/Pods-MojitoCafe/Pods-MojitoCafe.debug.xcconfig"; sourceTree = "<group>"; };
 		D152C8CA584164A0655F0666 /* Pods_MojitoCafe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojitoCafe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,6 +75,7 @@
 		3727650429E2EA1F006CAE87 /* MojitoCafe */ = {
 			isa = PBXGroup;
 			children = (
+				37A537E729E956E1008D85CB /* materials */,
 				3727651929E2EA4E006CAE87 /* Configurator */,
 				3727651A29E2EA5E006CAE87 /* Screens */,
 				3727652729E2EB70006CAE87 /* AppDelegate.swift */,
@@ -115,7 +118,7 @@
 		3727651C29E2EAA7006CAE87 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				37693F7929E6BC0C00B4078F /* API's */,
+				37693F7C29E6C0D300B4078F /* API's */,
 				3727652D29E2EBB5006CAE87 /* Extensions */,
 				3727651F29E2EAC0006CAE87 /* Model */,
 				3727651E29E2EABA006CAE87 /* ViewModel */,
@@ -175,6 +178,22 @@
 				3727652E29E2EBC8006CAE87 /* Extension+MenuVC.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		37693F7C29E6C0D300B4078F /* API's */ = {
+			isa = PBXGroup;
+			children = (
+				37693F7D29E6C0D300B4078F /* ServiceDatabase.swift */,
+			);
+			path = "API's";
+			sourceTree = "<group>";
+		};
+		37A537E729E956E1008D85CB /* materials */ = {
+			isa = PBXGroup;
+			children = (
+				37A537E829E956FE008D85CB /* mojito.jpg */,
+			);
+			path = materials;
 			sourceTree = "<group>";
 		};
 		46EED2B74CA5BAFBC9126C1D /* Pods */ = {
@@ -255,9 +274,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3727651229E2EA20006CAE87 /* LaunchScreen.storyboard in Resources */,
-				37693F7B29E6BC1100B4078F /* API's in Resources */,
 				3727650F29E2EA20006CAE87 /* Assets.xcassets in Resources */,
 				3784BFAF29E31238009FF24B /* GoogleService-Info.plist in Resources */,
+				37A537E929E956FE008D85CB /* mojito.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +335,7 @@
 				3727652429E2EB15006CAE87 /* MenuViewController.swift in Sources */,
 				3727652A29E2EB96006CAE87 /* SceneDelegate.swift in Sources */,
 				3727652C29E2EBAE006CAE87 /* ProductModel.swift in Sources */,
+				37693F7E29E6C0D300B4078F /* ServiceDatabase.swift in Sources */,
 				3727652F29E2EBC8006CAE87 /* Extension+MenuVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -465,6 +485,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -495,6 +516,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
