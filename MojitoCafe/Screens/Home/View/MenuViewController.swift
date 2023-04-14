@@ -37,15 +37,17 @@ final class MenuGroupCollectionViewCell:UICollectionViewCell{
     
    private func unselectedCellView(){
        
-        self.backgroundColor = .green
-        self.layer.sublayers?.first?.backgroundColor = UIColor.clear.cgColor
+       self.backgroundColor = .clear
+       sectionNameLabel.textColor = .white
+       self.layer.sublayers?.first?.backgroundColor = UIColor.clear.cgColor
        
     }
     
     private func selectedCellView(){
         
-        self.backgroundColor = .yellow
-        self.layer.sublayers?.first?.backgroundColor = UIColor.yellow.cgColor
+        self.backgroundColor = .init(white: 1.0, alpha: 0.9)
+        sectionNameLabel.textColor = .black
+        self.layer.sublayers?.first?.backgroundColor = UIColor.white.cgColor
         
     }
     
@@ -85,11 +87,35 @@ final class MenuProductsTableViewCell:UITableViewCell{
         
         cellView.translatesAutoresizingMaskIntoConstraints = false
         
+        let gradientLayer = CAGradientLayer()
+        
+        let upperColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1.0).cgColor
+        let bottomColor = UIColor(red: 0.0/255.0, green: 160.0/255.0, blue: 0.0/255.0, alpha: 1.0).cgColor
+        
+        gradientLayer.colors = [upperColor,bottomColor]
+
+        gradientLayer.locations = [0.1,1.0]
+        
+        DispatchQueue.main.async {
+            
+            gradientLayer.frame = self.bounds
+            
+        }
+        
+        cellView.layer.addSublayer(gradientLayer)
+        
         cellView.layer.masksToBounds = true
         cellView.layer.cornerRadius = 10
         
+        DispatchQueue.main.async {
+            self.layer.shadowOffset = .zero
+            self.layer.shadowOpacity = 1.0
+            self.layer.shadowColor = UIColor.init(white: 1.0, alpha: 0.9).cgColor
+            self.layer.shadowRadius = 2
+            
+        }
         
-        cellView.backgroundColor = .yellow
+        
         
         return cellView
     }()
@@ -100,7 +126,8 @@ final class MenuProductsTableViewCell:UITableViewCell{
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
-        imageView.backgroundColor = .red
+        imageView.backgroundColor = .white
+        imageView.contentMode = .scaleAspectFill
         
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 10
@@ -114,12 +141,14 @@ final class MenuProductsTableViewCell:UITableViewCell{
         
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        label.backgroundColor = .green
-        
         label.textAlignment = .center
-        label.textColor = .black
+        label.textColor = .init(white: 1.0, alpha: 0.9)
         
-        label.adjustsFontSizeToFitWidth = true
+        label.attributedText = NSAttributedString(
+            string: label.text ?? " ",
+            attributes: [
+                NSAttributedString.Key.font:UIFont.systemFont(ofSize: 19, weight: .bold)
+            ])
         
         return label
     }()
@@ -130,13 +159,16 @@ final class MenuProductsTableViewCell:UITableViewCell{
         
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        label.backgroundColor = .green
-        
         label.textAlignment = .natural
-        label.textColor = .black
+        label.textColor = .init(white: 1.0, alpha: 0.9)
         label.numberOfLines = 3
+        label.textAlignment = .center
         
-        label.text = "Test description"
+        label.attributedText = NSAttributedString(
+            string: label.text ?? " ",
+            attributes: [
+            NSAttributedString.Key.font:UIFont.systemFont(ofSize: 16)
+        ])
         
         return label
     }()
@@ -146,14 +178,10 @@ final class MenuProductsTableViewCell:UITableViewCell{
         let label = UILabel(frame: .zero)
         
         label.translatesAutoresizingMaskIntoConstraints = false
-        
-        label.backgroundColor = .green
-        
+    
         label.textAlignment = .left
-        label.textColor = .black
-        
-        label.text = "MDL"
-        
+        label.textColor = .init(white: 1.0, alpha: 0.9)
+    
         return label
     }()
     
@@ -163,12 +191,8 @@ final class MenuProductsTableViewCell:UITableViewCell{
         
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        label.backgroundColor = .green
-        
         label.textAlignment = .right
-        label.textColor = .black
-        
-        label.text = "125"
+        label.textColor = .init(white: 1.0, alpha: 0.9)
         
         return label
     }()
@@ -176,6 +200,7 @@ final class MenuProductsTableViewCell:UITableViewCell{
     fileprivate func setupViews(){
         
         self.backgroundColor = .clear
+        self.selectedBackgroundView = UIView()
         
         cellView.addSubview(productImageView)
         cellView.addSubview(titleLabel)
@@ -210,7 +235,7 @@ final class MenuProductsTableViewCell:UITableViewCell{
         // Cell's View Constraints Section
         cellView.topAnchor.constraint(
             equalTo:self.topAnchor,
-            constant: 5
+            constant: 15
         ).isActive = true
         
         cellView.leftAnchor.constraint(
@@ -225,7 +250,7 @@ final class MenuProductsTableViewCell:UITableViewCell{
         
         cellView.bottomAnchor.constraint(
             equalTo: self.bottomAnchor,
-            constant: -5
+            constant: -15
         ).isActive = true
         
         
@@ -266,37 +291,64 @@ final class MenuProductsTableViewCell:UITableViewCell{
         ).isActive = true
         
         titleLabel.heightAnchor.constraint(
-            equalToConstant: 25
+            equalToConstant: 35
         ).isActive = true
         
         // Description Label Constraints Section
+        descriptionLabel.topAnchor.constraint(
+            equalTo: titleLabel.bottomAnchor,
+            constant: 10
+        ).isActive = true
         
-        descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: 10).isActive = true
+        descriptionLabel.leftAnchor.constraint(
+            equalTo: titleLabel.leftAnchor
+        ).isActive = true
         
-        descriptionLabel.leftAnchor.constraint(equalTo: titleLabel.leftAnchor).isActive = true
+        descriptionLabel.rightAnchor.constraint(
+            equalTo: titleLabel.rightAnchor
+        ).isActive = true
         
-        descriptionLabel.rightAnchor.constraint(equalTo: titleLabel.rightAnchor).isActive = true
+        descriptionLabel.heightAnchor.constraint(
+            equalToConstant: 45
+        ).isActive = true
         
-        descriptionLabel.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        // Price Label Constraints Section
+        priceLabel.topAnchor.constraint(
+            equalTo: currencyLabel.topAnchor
+        ).isActive = true
+
+        priceLabel.rightAnchor.constraint(
+            equalTo: descriptionLabel.centerXAnchor,
+            constant: -2
+        ).isActive = true
         
-        // Price and Currency labels Constraints Section
+        priceLabel.widthAnchor.constraint(
+            equalToConstant: 50
+        ).isActive = true
         
-        currencyLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor,constant: 5).isActive = true
+        priceLabel.bottomAnchor.constraint(
+            equalTo: cellView.bottomAnchor,constant: -5
+        ).isActive = true
         
-        currencyLabel.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        // Currency Label Constraints Section
+        currencyLabel.topAnchor.constraint(
+            equalTo: descriptionLabel.bottomAnchor,
+            constant: 5
+        ).isActive = true
         
-        currencyLabel.rightAnchor.constraint(equalTo: descriptionLabel.rightAnchor,constant: -35).isActive = true
+        currencyLabel.leftAnchor.constraint(
+            equalTo: descriptionLabel.centerXAnchor,
+            constant: 2
+        ).isActive = true
         
-        currencyLabel.bottomAnchor.constraint(equalTo: cellView.bottomAnchor, constant: -5).isActive = true
+        currencyLabel.widthAnchor.constraint(
+            equalToConstant: 40
+        ).isActive = true
         
-        
-        priceLabel.topAnchor.constraint(equalTo: currencyLabel.topAnchor).isActive = true
-        
-        priceLabel.leftAnchor.constraint(equalTo: descriptionLabel.leftAnchor,constant: 35).isActive = true
-        
-        priceLabel.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        
-        priceLabel.bottomAnchor.constraint(equalTo: cellView.bottomAnchor,constant: -5).isActive = true 
+        currencyLabel.bottomAnchor.constraint(
+            equalTo: cellView.bottomAnchor,
+            constant: -5
+        ).isActive = true
         
     }
     
@@ -323,7 +375,21 @@ final class MenuViewController: UIViewController,UINavigationControllerDelegate 
     
     private func initializeBackgroundView(){
         
-        view.backgroundColor = .lightGray
+        let bgImageView = UIImageView(frame: view.bounds)
+        
+        bgImageView.image = UIImage(named: "mojito.jpg")
+        bgImageView.contentMode = .scaleAspectFill
+        
+        let blurEffect = UIBlurEffect(style: .dark)
+        
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        
+        blurEffectView.frame = bgImageView.bounds
+        
+        bgImageView.addSubview(blurEffectView)
+        
+        
+        view.addSubview(bgImageView)
         
     }
     
@@ -335,7 +401,8 @@ final class MenuViewController: UIViewController,UINavigationControllerDelegate 
         navigationController?.navigationBar.layoutIfNeeded()
         
         let titleTextAttributes:[NSAttributedString.Key:Any] = [
-            NSAttributedString.Key.font:UIFont.systemFont(ofSize: 21, weight: .bold)
+            NSAttributedString.Key.font:UIFont.systemFont(ofSize: 21, weight: .bold),
+            NSAttributedString.Key.foregroundColor:UIColor.init(white: 1.0, alpha: 0.9)
         ]
         
         navigationController?.navigationBar.titleTextAttributes = titleTextAttributes
@@ -390,8 +457,8 @@ final class MenuViewController: UIViewController,UINavigationControllerDelegate 
         
         menuProductsScrollView?.translatesAutoresizingMaskIntoConstraints = false
         
-        menuProductsScrollView?.layer.borderColor = UIColor.green.cgColor
-        menuProductsScrollView?.layer.borderWidth = 2
+//        menuProductsScrollView?.layer.borderColor = UIColor.green.cgColor
+//        menuProductsScrollView?.layer.borderWidth = 2
         
         menuProductsScrollView?.isPagingEnabled = true
         menuProductsScrollView?.alwaysBounceHorizontal = false
@@ -412,6 +479,8 @@ final class MenuViewController: UIViewController,UINavigationControllerDelegate 
             
             let tableView = createProductsTableView()
             tableView.restorationIdentifier = String(category.name)
+            
+            tableView.estimatedRowHeight = 150
 
             menuProductsTableViews.append(tableView)
             
