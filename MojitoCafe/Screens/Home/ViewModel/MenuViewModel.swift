@@ -6,12 +6,58 @@
 //
 
 import Combine
-import UIKit
 
-final class MenuViewModel{
+protocol ProductViewProtocol:ObservableObject{
     
-    @Published var categories:[Category] = [Category]()
-    @Published var products:[Product] = [Product]()
+    var productPublished:Published<Product?>.Publisher {get}
+    var productViewPublished:Published<ProductDetailsView?>.Publisher {get}
+    
+    var productView:ProductDetailsView?{get set}
+    var product:Product?{get set}
+    
+    func setup() -> Void
+}
+
+protocol MenuViewControllerProtocol:ObservableObject{
+    
+    var categoriesPublished:Published<[Category]>.Publisher {get}
+    var productsPublshed:Published<[Product]>.Publisher {get}
+    
+    var categories:[Category]{get set}
+    var products:[Product] {get set}
+    
+    func fetchMenuFromDatabase() -> Void
+    
+}
+
+final class MenuViewModel:MenuViewControllerProtocol,ProductViewProtocol{
+    
+    var categoriesPublished: Published<[Category]>.Publisher {$categories}
+    
+    var productsPublshed: Published<[Product]>.Publisher {$products}
+    
+    var productPublished:Published<Product?>.Publisher {$product}
+    
+    var productViewPublished: Published<ProductDetailsView?>.Publisher {$productView}
+    
+    
+    @Published var categories: [Category] = [Category]()
+    @Published var products: [Product] = [Product]()
+    
+    @Published var productView:ProductDetailsView?
+    @Published var product:Product?
+    
+    func setup(){
+        
+        productView = ProductDetailsView()
+        
+        productView?.productDetails = self
+        
+        productView?.setupConstraints()
+        
+        productView?.setupProductDetailsSubscriber()
+    
+    }
     
     func fetchMenuFromDatabase(){
         
@@ -66,7 +112,6 @@ final class MenuViewModel{
                 self?.products = products
                             
             }
-            
             
         }
         
