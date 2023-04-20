@@ -22,7 +22,6 @@ final class MenuGroupCollectionViewCell:UICollectionViewCell{
                 unselectedCellView()
             }
         }
-        
     }
     
     func initializeCellView(){
@@ -229,7 +228,7 @@ final class MenuProductsTableViewCell:UITableViewCell{
         fatalError()
     }
     
-    //MARK: - Table View's Product's Cell Constraints Section
+    //MARK: - Product Cell Constraints
     private func setupConstraints(){
         
         // Cell's View Constraints Section
@@ -357,11 +356,13 @@ final class MenuProductsTableViewCell:UITableViewCell{
 //MARK: - MenuViewController class
 final class MenuViewController: UIViewController,UINavigationControllerDelegate {
     
+    fileprivate var subscribers:[AnyCancellable] = []
+    
     fileprivate var subscriberCategories:AnyCancellable?
     
-    fileprivate var subscriberProducts:AnyCancellable?
+    var menuViewModel: (any MenuViewControllerProtocol)! = MenuViewModel()
     
-    var menuViewModel = MenuViewModel()
+    var productDetailsViewModel: (any ProductViewProtocol)! = MenuViewModel()
     
     var menuGroupCollectionView:UICollectionView?
     
@@ -392,7 +393,7 @@ final class MenuViewController: UIViewController,UINavigationControllerDelegate 
         view.addSubview(bgImageView)
         
     }
-    
+    //MARK: - Navigation Bar setup
     private func inititalizeNavigationBarView(){
         
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -456,9 +457,6 @@ final class MenuViewController: UIViewController,UINavigationControllerDelegate 
         menuProductsScrollView = UIScrollView(frame: .zero)
         
         menuProductsScrollView?.translatesAutoresizingMaskIntoConstraints = false
-        
-//        menuProductsScrollView?.layer.borderColor = UIColor.green.cgColor
-//        menuProductsScrollView?.layer.borderWidth = 2
         
         menuProductsScrollView?.isPagingEnabled = true
         menuProductsScrollView?.alwaysBounceHorizontal = false
@@ -542,30 +540,47 @@ final class MenuViewController: UIViewController,UINavigationControllerDelegate 
         return menuProductsTableView
     }
     
+    //MARK: - MenuSubscriber
     private func initializeMenuGroupSubscriber(){
         
         menuViewModel.fetchMenuFromDatabase()
  
-            subscriberCategories = menuViewModel.$categories.sink{
-                
+            subscriberCategories = menuViewModel.categoriesPublished.sink{
+
                 [weak self] categories in
-                
+
                 if categories.count != 0 {
-                    
+
                     DispatchQueue.main.async {
-                        
+
                         self?.menuGroupCollectionView?.reloadData()
-                        
+
                         self?.menuGroupCollectionView?.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: .centeredHorizontally)
-                        
+
                         self?.initializeMenuProductsTableViews()
                         
-                        
                     }
-                    
+
                 }
-                
+
             }
+        guard let subscriberCategories = subscriberCategories else{return}
+        subscribers.append(subscriberCategories)
+        
+    }
+    
+    private func initializeProductViewSubscriber(){
+        
+        productDetailsViewModel.productViewPublished.sink{
+            productView in
+            
+            guard let productView = productView else {return}
+            
+           productView.frame = self.view.bounds
+           self.view.addSubview(productView)
+        }.store(in: &subscribers)
+    
+        
         
     }
     
@@ -583,6 +598,8 @@ final class MenuViewController: UIViewController,UINavigationControllerDelegate 
         initializeMenuProductsScrollView()
         
         initializeMenuGroupSubscriber()
+        
+        initializeProductViewSubscriber()
     
     }
     
