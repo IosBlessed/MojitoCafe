@@ -45,12 +45,14 @@ extension MenuViewController: UICollectionViewDelegate,UICollectionViewDataSourc
                 collectionView.deselectItem(at: index, animated: true)
             }
             
+        currentCategory = menuViewModel.categories[indexPath.row]
+        
             collectionView.selectItem(
                 at: indexPath,
                 animated: true,
                 scrollPosition: .centeredHorizontally
             )
-
+        
             collectionView.scrollToItem(
                 at: indexPath,
                 at: .centeredHorizontally,
@@ -85,6 +87,7 @@ extension MenuViewController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         if let cell = tableView.dequeueReusableCell(withIdentifier: "productTableViewCell") as? MenuProductsTableViewCell{
             
             
@@ -114,6 +117,15 @@ extension MenuViewController:UITableViewDelegate,UITableViewDataSource{
         return 170
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Opens View Controller section with the product specification
+        //print(currentCategory?.products?[indexPath.row].title)
+        productDetailsViewModel.product = currentCategory?.products?[indexPath.row]
+        productDetailsViewModel.setup()
+        // initialization via combine 
+        
+    }
+    
 }
 
 extension MenuViewController:UIScrollViewDelegate{
@@ -124,12 +136,15 @@ extension MenuViewController:UIScrollViewDelegate{
             let tableViewXoffset:Int = Int(scrollView.contentOffset.x)
             let contentWidth:Int = Int(scrollView.bounds.width)
             
-            let menuGrupSection = tableViewXoffset / contentWidth
+            let menuGroupSection = tableViewXoffset / contentWidth
 
             menuGroupCollectionView?.selectItem(
-                at: IndexPath(item: menuGrupSection, section: 0),
+                at: IndexPath(item: menuGroupSection, section: 0),
                 animated: true,
                 scrollPosition: .centeredHorizontally)
+            
+            currentCategory = menuViewModel.categories[menuGroupSection]
+           
         }
     }
     
