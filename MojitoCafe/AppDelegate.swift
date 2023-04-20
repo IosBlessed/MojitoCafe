@@ -14,6 +14,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         
+        if #available(iOS 15, *) {
+          //  UINavigationBar.appearance().standardAppearance = navigationBarAppearance
+            UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+            UINavigationBar.appearance().shadowImage = UIImage()
+            
+            let tabBarApperance = UITabBarAppearance()
+            tabBarApperance.configureWithOpaqueBackground()
+            UITabBar.appearance().standardAppearance = tabBarApperance
+            
+        }
+        
         return true
     }
 
