@@ -6,10 +6,17 @@
 //
 
 import UIKit
+import Combine
 
 class ProductDetailsView: UIView {
     
-   private lazy var viewForScrollView:UIView = {
+    
+    //MARK: - Properties
+    weak var productDetails:(any ProductViewProtocol)?
+    
+    var subscribersProductView:[AnyCancellable] = []
+
+    private lazy var viewForScrollView:UIView = {
         
         let view = UIView(frame: .zero)
         
@@ -35,7 +42,7 @@ class ProductDetailsView: UIView {
         
         scrollView.translatesAutoresizingMaskIntoConstraints = true
     
-        scrollView.autoresizingMask = .flexibleWidth
+        scrollView.autoresizingMask = [.flexibleWidth]
         
         scrollView.backgroundColor = .gray
         
@@ -49,7 +56,7 @@ class ProductDetailsView: UIView {
         return scrollView
     }()
     
-   private lazy var contentView:UIView = {
+    private lazy var contentView:UIView = {
         
         let contentView = UIView(frame: .zero)
         
@@ -70,8 +77,6 @@ class ProductDetailsView: UIView {
         
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        //label.autoresizingMask = .flexibleWidth
-        
         label.backgroundColor = .white
         label.textAlignment = .center
         label.tintColor = .black
@@ -82,33 +87,39 @@ class ProductDetailsView: UIView {
             NSAttributedString.Key.font:UIFont.systemFont(ofSize: 22, weight: .bold)
         ])
         
-        
         return label
     }()
     
     
-    private func initialSetup(){
-        
-        self.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+    //MARK: - Gesture Recognizer
+    private func initializeCloseViewRecognizer(){
         
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(removeView))
         
         self.addGestureRecognizer(tapRecognizer)
+    }
+    
+    //MARK: - Subviews
+    private func addSubviews(){
         
         self.addSubview(viewForScrollView)
         viewForScrollView.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(productTitleLabel)
-                
+        
     }
-    
+
+    //MARK: - Selectors (objc-C)
     @objc func removeView(){
         
         self.removeFromSuperview()
         
+        self.subscribersProductView.removeAll()
+        
     }
     
-    private func setupConstraints(){
+    //MARK: - Constraints
+    func setupConstraints(){
         
         viewForScrollView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
 
@@ -117,8 +128,8 @@ class ProductDetailsView: UIView {
         viewForScrollView.widthAnchor.constraint(equalToConstant: self.bounds.width/1.2).isActive = true
 
         viewForScrollView.heightAnchor.constraint(equalToConstant: self.bounds.height/2.5).isActive = true
-
-       
+    
+        
         //For view's inside content view bounds
       
         productTitleLabel.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 20).isActive = true
@@ -128,31 +139,53 @@ class ProductDetailsView: UIView {
         productTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30).isActive = true
 
         productTitleLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
-       
+//
+        
         DispatchQueue.main.async {
+            [weak self] in
             
-            UIView.animate(withDuration: 0.3){
-                self.scrollView.frame = self.viewForScrollView.bounds
+            let defaultCgRect = CGRect(x: 0, y: 0, width: 0, height: 0)
+            
+            UIView.animate(withDuration: 0.5){
+                self?.scrollView.frame = self?.viewForScrollView.bounds ?? defaultCgRect
+                
             }
-            self.contentView.frame = self.scrollView.bounds
+            self?.contentView.frame = self?.scrollView.bounds ?? defaultCgRect
+            
             
         }
+      
         
     }
-   
-
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
+  
+    func setupProductDetailsSubscriber(){
+        
+        productDetails?.productPublished.sink{
+            product in
+            print(product?.title ?? "Unknown title")
+            self.productTitleLabel.text = product?.title
+            
+        }.store(in: &subscribersProductView)
+        
     }
     
-    init(){
-        super.init(frame: .zero)
-        initialSetup()
+    //MARK: - Lyfecycle
+    private func initialSetup(){
         
-        DispatchQueue.main.async {
-            self.setupConstraints()
-        }
+        self.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+        
+        initializeCloseViewRecognizer()
+        
+        addSubviews()
+                
+    }
 
+    init(){
+        
+        super.init(frame: .zero)
+        
+        initialSetup()
+  
     }
     
     required init?(coder: NSCoder) {
